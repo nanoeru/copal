@@ -4,8 +4,8 @@ import (
 	"bufio"
 	"encoding/csv"
 	"fmt"
+	"github.com/nanoeru/copal/val"
 	"io"
-	"copal/val"
 	"os"
 )
 
