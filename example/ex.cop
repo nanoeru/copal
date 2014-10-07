@@ -1,0 +1,34 @@
+//	型にとらわれずに加算
+func plus(x, y) {
+	return x + y
+}
+
+//	加算関数の使用例
+println("----plus-func----")
+println("A + B =", plus("A", "B"))
+println("1 + 2 =", plus(1, 2))
+
+//	無名関数
+println("----no-name-func----")
+f := func(){
+	println(1)
+}
+f()
+
+println(func(){
+	println(2)
+	return 3
+}())
+
+//	スライス(可変長配列)
+println("----slice----")
+println([]{1,2,6})
+println([]{1,2,6}["0"])
+println([]{1,2,6}[1])
+println([]{1,2,"a b c"}["2"].split(" "))
+println([]{1,2,"a-b-c"}[2].split("-"))
+//	output
+//	[a, b, c]
+println([]{1,2,"a-b-c"}[2].split("-").join("@"))
+//	output
+//	a@b@c

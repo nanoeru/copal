@@ -1,0 +1,3 @@
+//	コマンドライン引数
+println("argsN:", len($))//	長さ
+println($)//	値

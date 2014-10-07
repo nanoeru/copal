@@ -1,0 +1,52 @@
+buf := 10
+chA, chB, chC, chD := new_chan(buf, buf, buf, buf)
+
+//	A, B, C, D
+chA0, chA1, chA2, chA3, chA4, chA5 := cir_split(6, chA)
+chA00, chA01 := cir_split(2, cir_not(chA0))
+chB0, chB1, chB2, chB3, chB4, chB5 := cir_split(6, chB)
+chB00, chB01, chB02, chB03, chB04, chB05 := cir_split(6, cir_not(chB0))
+chC0, chC1, chC2, chC3, chC4, chC5, chC6, chC7 := cir_split(8, chC)
+chC00, chC01, chC02, chC03, chC04 := cir_split(5, cir_not(chC0))
+chD0, chD1, chD2, chD3, chD4 := cir_split(5, chD)
+chD00, chD01, chD02, chD03, chD04, chD05, chD06, chD07 := cir_split(8, cir_not(chD0))
+
+//	a, b, c, d, e, f, g
+cha := cir_or(chA1, cir_and(chB1, chD1), chC1, cir_and(chB00, chD00))
+chb := cir_or(chB01, cir_and(chC2, chD2), cir_and(chC00, chD01))
+chc := cir_or(chA2, chB2, chC01, chD3)
+chd := cir_or(chA3, cir_and(chB02, chD02), cir_and(chC3, chD03), cir_and(chA00, chB03, chC4), cir_and(chB3, chC02, chD4))
+che := cir_or(cir_and(chB04, chD04), cir_and(chC5, chD05))
+chf := cir_or(chA4, chB4, cir_and(chC03, chD06))
+chg := cir_or(chA5, cir_and(chB5, chC04), cir_and(chC6, chD07), cir_and(chA01, chB05, chC7))
+
+func send(a, b, c, d) {
+	chA <- a;	chB <- b
+	chC <- c;	chD <- d
+}
+
+//	2進数
+//	9
+send(1, 0, 0, 1)
+//	8
+send(1, 0, 0, 0)
+//	7
+send(0, 1, 1, 1)
+//	6
+send(0, 1, 1, 0)
+//	5
+send(0, 1, 0, 1)
+//	4
+send(0, 1, 0, 0)
+//	3
+send(0, 0, 1, 1)
+//	2
+send(0, 0, 1, 0)
+//	1
+send(0, 0, 0, 1)
+//	0
+send(0, 0, 0, 0)
+
+close(chA, chB, chC, chD)
+
+led7(cha, chb, chc, chd, che, chf, chg)

@@ -1,0 +1,19 @@
+//	通常ファイル
+ch := fread("file.go")
+line := <- ch
+println("--------")
+for i := 0; line != nil; i++ {
+	println(i, ":", line)
+	line = <- ch
+}
+println("--------")
+
+//	csvファイル
+ch := csv_read("data.csv")
+datas := <- ch
+println("--------")
+for i := 0; datas != nil; i++ {
+	println(i, ":", datas.join("@"))
+	datas = <- ch
+}
+println("--------")

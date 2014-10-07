@@ -1,0 +1,14 @@
+//	cat -n ***
+//	通常の方法
+
+ch := nil
+if len($) == 0 {
+	ch = stdin
+} else {
+	ch = fread($[0])
+}
+line := <- ch
+for i := 1; line != nil; i++ {
+	println("    ", i, "", line)
+	line = <- ch
+}

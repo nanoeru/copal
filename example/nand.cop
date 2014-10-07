@@ -1,0 +1,32 @@
+//	回路テンプレート(NANDゲート×3)
+//	>NAND--
+//	      |--NAND--
+//	>NAND--
+func nand3(ch1, ch2, ch3, ch4) (chan) {
+	return cir_nand(cir_nand(ch1, ch2), cir_nand(ch3, ch4))
+}
+
+//	入力設定
+buf := 1
+chA, chB, chC, chD, chE, chF, chG, chH := new_chan(buf, buf, buf, buf, buf, buf, buf, buf)
+
+//	回路作成
+//	>NAND--
+//	      |--NAND--
+//	>NAND--       |
+//	              |--NAND--
+//	>NAND--       |
+//	      |--NAND--
+//	>NAND--
+ans := cir_nand(nand3(chA, chB, chC, chD), nand3(chE, chF, chG, chH))
+chA <-true
+chB <-true
+chC <-true
+chD <-false
+chE <-false
+chF <-true
+chG <-false
+chH <-true
+println(<-ans)
+//	output
+//	true?

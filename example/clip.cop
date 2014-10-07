@@ -1,0 +1,10 @@
+//	クリップボード読み込み
+println("clip_read")
+println(clip_read())
+println()
+
+//	クリップボード書き込み及び表示
+println("clip_write")
+clip_write("Copal_clip_write")
+println(clip_read())
+println()

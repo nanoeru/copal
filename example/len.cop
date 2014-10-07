@@ -1,0 +1,8 @@
+//	lenは文字列のbyte数を返す
+println(len("aaa"))//	3
+println(len("あいうv"))//	10
+println(len("＠＠"))//	6
+ch := new_chan(3)
+println(len(ch))//	0
+ch <- 123
+println(len(ch))//	1

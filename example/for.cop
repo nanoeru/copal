@@ -1,0 +1,16 @@
+//	for文
+println("----インクリメント----")
+for i := 0; i < 10; i++ {
+	println(i)
+}
+
+//	for イテレータ
+println("----文字列----")
+for i, v := range "Hello!" {
+	println(i, v)
+}
+
+println("----スライス----")
+for i, v := range []{"Hello1", "Hello2"} {
+	println(i, v)
+}

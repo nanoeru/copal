@@ -1,0 +1,8 @@
+//	関数を呼ぶ関数
+func do(f) {
+	f(123)
+}
+
+do(func (i) {
+	println("ABC", i)
+})

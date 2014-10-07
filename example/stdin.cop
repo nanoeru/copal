@@ -1,0 +1,3 @@
+for i, line := range stdin {
+	print("    ", i + 1, "", line)
+}

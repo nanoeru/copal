@@ -1,0 +1,16 @@
+//	echo server
+go func() {
+	print(server("8080", func(req) (string) {
+		return req
+	}))
+}()
+
+//	http server
+func go_server(port) {
+	print(http_server(port, func(req) (string) {
+		log("port", port, "url",req)
+		return "Access url is " + req
+	}))
+}
+go go_server("8081")
+go go_server("8082")

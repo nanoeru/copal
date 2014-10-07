@@ -1,0 +1,6 @@
+//	ファイル書き込み
+wch := fwrite("sample.log")
+wch <- "abc"
+wch <- "def"+"\n"
+wch <- "ghi"
+close(wch)

@@ -1,0 +1,22 @@
+if len($) == 0 {
+	info("数値のみで構成されるファイルを指定")
+	info("ex) data/4.txt")
+	fatal("第一引数にファイルパスを指定してください")
+}
+
+//	第一引数に指定したファイルの各行の数値を合計した結果を出力する
+ch := fread($[0])
+
+sum := 0
+cnt := 0
+line := <- ch
+for i := 0; line != nil; i++ {
+//	print(i, ":", line)
+	line = <- ch
+	sum = sum + int(line)
+	cnt = i
+}
+
+println("cnt", cnt)
+println("sum", sum)
+println("ave", float(sum) / cnt)

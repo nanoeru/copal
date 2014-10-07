@@ -1,0 +1,25 @@
+//	指定回数URLへアクセス
+func curl(url, n) {
+	for i := 0; i < n; i++ {
+		exec("curl " + url)
+	}
+}
+
+if len($) < 2 {
+	println("url,アクセス回数 を引数に指定してください。")
+	println("ex) localhost:8080, 10")
+	exit(0)
+}
+
+url := $[0]
+n := $[1]
+if n < 0 {
+	println("require: n >= 0")	
+	exit(0)
+}
+
+//	4並列
+go curl(url, n)
+go curl(url, n)
+go curl(url, n)
+go curl(url, n)

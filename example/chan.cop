@@ -1,0 +1,33 @@
+//	ch1とch2は同一チャネル
+ch1 := new_chan(3)
+ch2 := ch1
+
+//	ユーザー定義関数(引数なし)
+func send1(v) {
+	ch1 <- v
+}
+//	ユーザー定義関数(引数あり)
+func send2(ch, v) {
+	ch <- v
+}
+
+//	送信
+send1("send1")
+send2(ch1, "send2")
+
+//	len 値格納数	cap キャパシティ
+println("ch1(len)", len(ch1))
+println("ch1(cap)", cap(ch1))
+println("ch2(len)", len(ch2))
+println("ch2(cap)", cap(ch2))
+
+//	受信及び表示
+//	無名関数即時実行(引数なし)
+func() {
+	println(<-ch1)
+}()
+//	無名関数即時実行(引数あり)
+func(ch) {
+	println(<-ch)
+}(ch2)
+

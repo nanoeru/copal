@@ -1,0 +1,2 @@
+#!/Users/user/gopath/src/copal/copal
+println("Arg slice:", $)

@@ -1,0 +1,18 @@
+//	フィボナッチ数列(再帰的計算)
+func fibo(n) {
+	if n < 2 {
+		return n
+	} else {
+		return fibo(n - 1) + fibo(n - 2)
+	}
+}
+
+println("A")
+go func(n) {
+	println("fibo(", n, ")", "=", fibo(n))
+}(30)
+println("B")
+//	output
+// A
+// B
+// fibo( 30 ) = 832040

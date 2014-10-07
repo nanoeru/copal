@@ -1,0 +1,28 @@
+// //	簡易シンタックスハイライター
+
+// 	for i, line := range stdin {
+// 		println(i + 1, ":",
+// 			line.reg_draw("white", "[a-zA-Z_$0-9]+")
+// 				.reg_draw("cyan", "func|print|println|len|exit|exec")
+// 				.reg_draw("magenta", "for|return|if|go")
+// 				.reg_draw("blue", "[!.,=;<>+]|[:=]|\\-")
+// 				.reg_draw("yellow", "\"([^\\\"]|\\\\.)*\"")
+// 				.reg_draw("dark_gray", "(^[ 	]*//.*|//[^\"]*$)"))
+// 	}
+
+
+
+
+//	簡易シンタックスハイライター
+line := <- stdin
+for i := 1; line != nil; i++ {
+	// line = line.reg_draw("white", "[a-zA-Z_$0-9]+")//	英語数字
+	// line = line.reg_draw("cyan", "func|print|println|filter|unfilter|len|exit|exec")//	組み込み関数・メソッド
+	// line = line.reg_draw("magenta", "for|return|if|go")//	キーワード
+	// line = line.reg_draw("blue", "[!.,=;<>+]|[:=]|\\-")//	記号
+	// line = line.reg_draw("yellow", "\"([^\\\"]|\\\\.)*\"")//	文字列
+	// line = line.reg_draw("dark_gray", "(^[ 	]*//.*|//[^\"]*$)")//	なんちゃって1行コメント
+	// println(i, ":", line)
+	println(i, ":", line.reg_draw("white", "[a-zA-Z_$0-9]+").reg_draw("cyan", "func|print|println|filter|unfilter|len|exit|exec").reg_draw("magenta", "for|return|if|go").reg_draw("blue", "[!.,=;<>+]|[:=]|\\-").reg_draw("yellow", "\"([^\\\"]|\\\\.)*\"").reg_draw("dark_gray", "(^[ 	]*//.*|//[^\"]*$)"))
+	line = <- stdin
+}

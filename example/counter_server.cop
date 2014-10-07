@@ -1,0 +1,32 @@
+//	カウンター
+func counter() {
+	ch := new_chan(0)
+	go func() {
+		i := 1
+		for {
+			ch <- i
+			i++
+		}
+	}()
+	return ch
+}
+
+chs := []{counter(), counter(), counter(), counter()}
+ports := []{7083, 7084, 7085, 7086}
+
+//	サーバー起動関数
+func cnt_server(port, ch) {
+	go func() {
+		http_server(port, func(req) (string) {
+			cnt := <- ch
+			log("port", port, "url",req)
+			return "port:" + port + "\nAccess url:" + req + "\nNo." + cnt
+		})
+	}()
+}
+
+//	サーバー起動
+num := len(chs)
+for i := 0; i < num; i++ {
+	cnt_server(ports[i], chs[i])
+}

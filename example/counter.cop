@@ -1,0 +1,37 @@
+func counter() {
+	ch := new_chan(0)
+	go func() {
+		i := 1
+		for {
+			ch <- i
+			i++
+		}
+	}()
+	return ch
+}
+
+//	カウンター並列アクセス用loop
+func loop(no, chan, n, waitChan) {
+	println("start", no)
+	for i := 0; i < n; i++ {
+		<-chan
+	}
+	println("end", no)
+	waitChan <- 0
+}
+
+n := 250000
+ch, waitCh := counter(), new_chan(0)
+//	4並列アクセス
+go loop(1, ch, n, waitCh)
+go loop(2, ch, n, waitCh)
+go loop(3, ch, n, waitCh)
+go loop(4, ch, n, waitCh)
+//	待機
+<-waitCh; <-waitCh
+<-waitCh; <-waitCh
+
+println("require", n * 4 + 1)
+println("result ", <-ch)
+
+exit(0)
